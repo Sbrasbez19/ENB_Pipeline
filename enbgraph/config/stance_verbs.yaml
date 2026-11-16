@@ -1,0 +1,45 @@
+# Stance verb lexicon for the signed SVO/stance layer.
+#
+# Method: manually curated support/oppose verb lists, mirroring Sudhahar,
+# Veltri & Cristianini (2015), Appendix Table 8 (their positive/negative verb
+# lists), restricted to verbs that occur in ENB's diplomatic register and
+# extended with ENB-specific equivalents identified in the corpus audit
+# (docs/svo_stance_audit.md): top observed stance verbs were
+# supported(76), opposed(49), objected(6), agreed(5), welcomed(3).
+#
+# Forms are listed EXPLICITLY (no morphology code): more data, zero cleverness,
+# fully reviewable. Sign assignments are modeling choices — edit here, not in code.
+#
+# NOTE for extraction: "supported/backed/joined/opposed by" appositives are
+# handled structurally by the extractor (coalition rule), not by these lists.
+
+support:
+  support:  [support, supports, supported, supporting]
+  endorse:  [endorse, endorses, endorsed, endorsing]
+  back:     [back, backs, backed, backing]
+  favor:    [favor, favors, favored, favoring, favour, favours, favoured, favouring]
+  agree:    [agree, agrees, agreed, agreeing]
+  welcome:  [welcome, welcomes, welcomed, welcoming]
+  concur:   [concur, concurs, concurred, concurring]
+  commend:  [commend, commends, commended, commending]
+  approve:  [approve, approves, approved, approving]
+  applaud:  [applaud, applauds, applauded, applauding]
+  defend:   [defend, defends, defended, defending]
+  echo:     [echo, echoes, echoed, echoing]
+
+oppose:
+  oppose:    [oppose, opposes, opposed, opposing]
+  reject:    [reject, rejects, rejected, rejecting]
+  object:    [object, objects, objected, objecting]
+  disagree:  [disagree, disagrees, disagreed, disagreeing]
+  block:     [block, blocks, blocked, blocking]
+  resist:    [resist, resists, resisted, resisting]
+  criticize: [criticize, criticizes, criticized, criticizing, criticise, criticises, criticised, criticising]
+  question:  [question, questions, questioned, questioning]
+  challenge: [challenge, challenges, challenged, challenging]
+  caution:   [caution, cautions, cautioned, cautioning]
+  condemn:   [condemn, condemns, condemned, condemning]
+  refuse:    [refuse, refuses, refused, refusing]
+  decline:   [decline, declines, declined, declining]
+  dispute:   [dispute, disputes, disputed, disputing]
+  contest:   [contest, contests, contested, contesting]

@@ -1,0 +1,46 @@
+# --- Python / environment ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+build/
+dist/
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.claude/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Input corpus (ENB / UNFCCC PDFs: large, third-party; fetch separately) ---
+*.pdf
+samples/
+data/
+
+# --- Generated results (regenerate with the tools; never hand-edit) ---
+# phase_artifacts/ holds everything the tools produce. Only the example config
+# and the placeholder are tracked.
+phase_artifacts/*
+!phase_artifacts/dev_config.example.json
+!phase_artifacts/.gitkeep
+plots/
+result_graphs/
+result_plots/
+test_graphs/
+*.graphml
+*.gexf
+graphs/
+out/
+
+# Stray tool outputs written to the repo root by tools' default --out values
+/dev_config.json
+/train_sample.csv
+/train_labeled.csv
+/stance_sample.csv
+/manifest.json
+/metrics.json

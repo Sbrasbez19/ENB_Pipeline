@@ -1,0 +1,56 @@
+# ── src package: runtime dependencies ────────────────────────────────────────
+# Derived from the actual imports in the package (not guessed). Each line notes
+# which module needs it and why. Version floors reflect API features the code
+# relies on; exact versions tested in development are listed at the bottom.
+#
+# Note on import name vs. package name: two libraries are imported under a
+# different name than you pip-install — `import fitz` comes from PyMuPDF, and
+# `import yaml` comes from PyYAML. Installing "fitz" or "yaml" from PyPI would be
+# WRONG (those are unrelated/abandoned packages).
+
+pydantic>=2.0        # models.py — data contracts (BBox, TextBlock, Chunk, ...).
+                     #   MUST be v2: the code uses the v2 API (Field(default=...),
+                     #   model_config). Pydantic v1 would fail to import/validate.
+
+PyMuPDF>=1.23        # ingestion/ingester.py — imported as `fitz`; PDF text +
+                     #   layout extraction (get_text, load_page, page.rect).
+
+ftfy>=6.0            # utils.py — fix_encoding()/text repair.
+
+PyYAML>=6.0          # utils.py — imported as `yaml`; load_yaml() reads
+                     #   config/gazetteer.yaml.
+
+networkx>=3.0        # graph/builder.py, pipeline.py — graph storage + analysis.
+                     #   Floored at 3.x: pipeline.save_graph uses the 3.x
+                     #   node_link_data(edges=...) signature and Graph/DiGraph
+                     #   handling.
+numpy>=1.24        # graph/balance.py — signed adjacency + eigh spectral bisection.
+statsmodels>=0.14    # graph/aggregate.py — Wilson score interval
+                     #   (proportion_confint(..., method="wilson")) for the
+                     #   Bernoulli+Wilson signed-edge aggregation; accepts the
+                     #   tier-weighted float pseudo-counts (verified). Do NOT
+                     #   hand-roll the formula or use scipy.binomtest (ints only).
+
+# ── optional ─────────────────────────────────────────────────────────────────
+# spaCy is imported LAZILY (extraction/actors.py, inside SpacyRecallSource) and
+# is only needed if you enable the optional NER recall tier — which is OFF by
+# default and unused by the pipeline and webapp. Left commented so the base
+# install stays lean (spaCy pulls a large dependency tree + a model download).
+# spacy>=3.7
+# then: python -m spacy download en_core_web_sm
+
+# ── tools/audit_gazetteer.py (separate top-level folder) ─────────────────────
+# The gazetteer audit additionally needs pycountry (imported lazily inside the
+# audit tool). Not required to run the core pipeline, so it's not a hard dep of
+# the package; install it if/when you run the audit:
+# pycountry>=22.0
+
+# ── exact versions tested in development (pin these for reproducibility) ──────
+# pydantic==2.13.4
+# PyMuPDF==1.27.2.3
+# ftfy==6.3.1
+# PyYAML==6.0.3
+# networkx==3.6.1
+#
+# Python: 3.10+ recommended (the code uses PEP 585 builtin generics at runtime,
+# e.g. tuple[Chunk, list[Mention]] as an alias in graph/builder.py).

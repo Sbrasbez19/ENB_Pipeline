@@ -1,0 +1,283 @@
+# Actor gazetteer for ENB negotiation reports.
+# Edited as DATA, not code: add a Party or fix an alias here, never in the matcher.
+# Canonical names (the list entries) are the stable node IDs used across all years.
+# Aliases map surface spellings to a canonical that must appear in one of the lists.
+
+# --- States (category COUNTRY) -------------------------------------------------
+countries:
+  - Afghanistan
+  - Algeria
+  - Angola
+  - Antigua and Barbuda
+  - Argentina
+  - Armenia
+  - Australia
+  - Austria
+  - Azerbaijan
+  - Bahamas
+  - Bahrain
+  - Bangladesh
+  - Barbados
+  - Belarus
+  - Belgium
+  - Belize
+  - Benin
+  - Bhutan
+  - Bolivia
+  - Botswana
+  - Brazil
+  - Bulgaria
+  - Burkina Faso
+  - Burundi
+  - Cambodia
+  - Cameroon
+  - Canada
+  - Cape Verde
+  - Central African Republic
+  - Chad
+  - Chile
+  - China
+  - Colombia
+  - Comoros
+  - Congo
+  - Cook Islands
+  - Costa Rica
+  - Croatia
+  - Cuba
+  - Cyprus
+  - Czech Republic
+  - Denmark
+  - Djibouti
+  - Dominica
+  - Dominican Republic
+  - Ecuador
+  - Egypt
+  - El Salvador
+  - Eritrea
+  - Estonia
+  - Ethiopia
+  - Fiji
+  - Finland
+  - France
+  - Gabon
+  - Gambia
+  - Georgia
+  - Germany
+  - Ghana
+  - Greece
+  - Grenada
+  - Guatemala
+  - Guinea
+  - Guyana
+  - Haiti
+  - Honduras
+  - Hungary
+  - Iceland
+  - India
+  - Indonesia
+  - Iran
+  - Iraq
+  - Ireland
+  - Israel
+  - Italy
+  - Jamaica
+  - Japan
+  - Jordan
+  - Kazakhstan
+  - Kenya
+  - Kiribati
+  - Kuwait
+  - Kyrgyzstan
+  - Latvia
+  - Lebanon
+  - Lesotho
+  - Liberia
+  - Libya
+  - Liechtenstein
+  - Lithuania
+  - Luxembourg
+  - Madagascar
+  - Malawi
+  - Malaysia
+  - Maldives
+  - Mali
+  - Malta
+  - Marshall Islands
+  - Mauritania
+  - Mauritius
+  - Mexico
+  - Micronesia
+  - Moldova
+  - Monaco
+  - Mongolia
+  - Morocco
+  - Mozambique
+  - Myanmar
+  - Namibia
+  - Nauru
+  - Nepal
+  - Netherlands
+  - New Zealand
+  - Nicaragua
+  - Niger
+  - Nigeria
+  - Niue
+  - North Korea
+  - Norway
+  - Oman
+  - Pakistan
+  - Palau
+  - Panama
+  - Papua New Guinea
+  - Paraguay
+  - Peru
+  - Philippines
+  - Poland
+  - Portugal
+  - Qatar
+  - Romania
+  - Russia
+  - Rwanda
+  - Saint Lucia
+  - Samoa
+  - San Marino
+  - Saudi Arabia
+  - Senegal
+  - Seychelles
+  - Sierra Leone
+  - Singapore
+  - Slovakia
+  - Slovenia
+  - Solomon Islands
+  - Somalia
+  - South Africa
+  - South Korea
+  - Spain
+  - Sri Lanka
+  - Sudan
+  - Suriname
+  - Swaziland
+  - Sweden
+  - Switzerland
+  - Syria
+  - Tajikistan
+  - Tanzania
+  - Thailand
+  - Togo
+  - Tonga
+  - Trinidad and Tobago
+  - Tunisia
+  - Turkey
+  - Turkmenistan
+  - Tuvalu
+  - Uganda
+  - Ukraine
+  - United Arab Emirates
+  - United Kingdom
+  - United States
+  - Uruguay
+  - Uzbekistan
+  - Vanuatu
+  - Venezuela
+  - Vietnam
+  - Yemen
+  - Zambia
+  - Zimbabwe
+
+# --- Negotiating coalitions / groups of states (category BLOC) -----------------
+blocs:
+  - AOSIS
+  - G-77/China
+  - European Union
+  - Umbrella Group
+  - JUSSCANNZ
+  - OPEC
+  - LDCs
+  - African Group
+  - Environmental Integrity Group
+  - CACAM
+  - Central Group
+  - Economies in Transition
+  - Annex I
+  - Annex II
+  - non-Annex I
+  - Annex B
+
+# --- Institutions / bodies (category ORG; off by default in the graph) ---------
+organizations:
+  - IPCC
+  - GEF
+  - UNEP
+  - UNDP
+  - WMO
+  - World Bank
+
+# --- Surface spelling -> canonical (canonical must exist above) -----------------
+aliases:
+  "US": United States
+  "U.S.": United States
+  "USA": United States
+  "United States of America": United States
+  "UK": United Kingdom
+  "Russian Federation": Russia
+  "Republic of Korea": South Korea
+  "Korea, Republic of": South Korea
+  "DPRK": North Korea
+  "Democratic People's Republic of Korea": North Korea
+  "Viet Nam": Vietnam
+  "Iran (Islamic Republic of)": Iran
+  "Libyan Arab Jamahiriya": Libya
+  "EC": European Union
+  "EU": European Union
+  "European Community": European Union
+  "European Communities": European Union
+  "G77": G-77/China
+  "G-77": G-77/China
+  "Alliance of Small Island States": AOSIS
+  "Group of 77 and China": G-77/China
+  "Group of 77": G-77/China
+  "EITs": Economies in Transition
+  "EIT": Economies in Transition
+  "Antigua": Antigua and Barbuda
+  "Least Developed Countries": LDCs
+
+# --- Procedural / instrument acronyms that LOOK like actors but are NOT ---------
+stoplist:
+  - FCCC
+  - UNFCCC
+  - COP
+  - MOP
+  - CMP
+  - SBSTA
+  - SBI
+  - SB
+  - CDM
+  - JI
+  - AIJ
+  - LULUCF
+  - CRP
+  - INF
+  - MISC
+  - QELRO
+  - QELRC
+  - GHG
+  - CO2
+  - AGBM
+  - AG13
+  - EGTT
+  - CGE
+  - LEG
+  - TTM
+  - GWP
+  - ODA
+  - GDP
+  - NGO
+  - NGOs
+  - IGO
+  - SAR
+  - TAR
+  - AR4
+  - IISD
+  - JWG
+  - BAPA
+  - PaMs

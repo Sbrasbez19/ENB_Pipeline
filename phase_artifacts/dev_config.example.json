@@ -1,0 +1,26 @@
+{
+  "training_years": [1996, 1999, 2002, 2005],
+  "test_years": [1998, 2000, 2001, 2003, 2006],
+  "extractor": "pattern",
+  "tier_precision": {
+    "1": 0.25,
+    "2": 1.0,
+    "3": 0.75
+  },
+  "tier_weights": {
+    "1": 0.25,
+    "2": 1.0,
+    "3": 0.75
+  },
+  "alpha_selected": {
+    "per_year": 0.32,
+    "pooled": 0.32
+  },
+  "alpha_selection_rule": "strictest level with training contested-fraction <= 0.5 (95% preferred, else 68%)",
+  "alpha_diagnostic": {
+    "per_year_mean_contested": {"95": 1.0, "68": 0.417},
+    "pooled_contested": {"95": 1.0, "68": 0.36}
+  },
+  "labeled_sample": "phase_artifacts/train_labeled.csv",
+  "note": "EXAMPLE ONLY. Copy to phase_artifacts/dev_config.json, or regenerate it with `python -m tools.phase1_develop freeze`. tier_weights = measured per-tier precision on TRAINING records; alpha is selected per regime by the stated rule on the training contested-fraction diagnostic; nothing here used the test years."
+}
