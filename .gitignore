@@ -36,6 +36,8 @@ test_graphs/
 *.gexf
 graphs/
 out/
+# LLM extraction runs and the response cache (tools/llm_extract.py)
+runs/
 
 # Stray tool outputs written to the repo root by tools' default --out values
 /dev_config.json
