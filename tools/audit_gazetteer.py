@@ -128,7 +128,7 @@ class AuditReport:
 
 
 def _country_reference() -> dict[str, str]:
-    import pycountry  # tools-only dependency
+    import pycountry  # pyright: ignore[reportMissingImports]  # optional, tools-only: pip install pycountry
     keys: dict[str, str] = {}
     for c in pycountry.countries:
         for attr in ("name", "official_name", "common_name"):

@@ -8,6 +8,8 @@ Tests pinning the two guarantees we just hardened:
 Run with:  pytest -q
 """
 
+from pathlib import Path
+
 import pytest
 
 from enbgraph.models import BBox, Document, DocumentMeta, Page, TextBlock, SectionKind
@@ -44,7 +46,7 @@ def test_dehyphenate_runs_before_quotes_are_irrelevant():
 def _doc(lines: list[str], doc_id: str = "synth") -> Document:
     blocks = [TextBlock(text=t, bbox=BBox(x0=0, y0=0, x1=1, y1=1), font_size=0.0) for t in lines]
     page = Page(number=1, width=612, height=792, blocks=blocks)
-    meta = DocumentMeta(doc_id=doc_id, source="s.pdf", cop="4", year=1998)
+    meta = DocumentMeta(doc_id=doc_id, source=Path("s.pdf"), cop="4", year=1998)
     return Document(meta=meta, pages=[page])
 
 
