@@ -24,6 +24,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 from pathlib import Path
 
 import matplotlib
@@ -316,11 +317,18 @@ def main():
     fig_tier_precision(cfg, a.out)
     fig_wilson(a.out)
     fig_centrality(metrics, a.out)
-    # the two most presentation-worthy networks
-    fig_network(tg, "POOLED_stance-direct.graphml",
-                "Pooled direct-stance network (1998–2006)", a.out)
-    fig_network(tg, "COP6-2000_stance-direct.graphml",
-                "COP-6 (The Hague, 2000) direct-stance network", a.out)
+    # one drawing per yearly direct-stance graph, plus the pooled one
+    yearly = []
+    for p in tg.glob("COP*_stance-direct.graphml"):
+        m = re.match(r"COP(\d+)-(\d{4})_", p.name)
+        if m:
+            yearly.append((int(m.group(2)), int(m.group(1)), p.name))
+    for year, cop, fname in sorted(yearly):
+        fig_network(tg, fname, f"COP-{cop} ({year}) direct-stance network", a.out)
+    if (tg / "POOLED_stance-direct.graphml").is_file():
+        span = f" ({min(yearly)[0]}–{max(yearly)[0]})" if yearly else ""
+        fig_network(tg, "POOLED_stance-direct.graphml",
+                    f"Pooled direct-stance network{span}", a.out)
     print(f"wrote figures -> {a.out}")
     for f in sorted(a.out.glob('*.png')):
         print("  ", f.name)
