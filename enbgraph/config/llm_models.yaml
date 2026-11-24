@@ -1,0 +1,23 @@
+# LLM extractor endpoints for tools/llm_extract.py.
+#
+# One entry per model server (one vLLM SLURM job each). Fields:
+#   base_url      OpenAI-compatible endpoint of the running server
+#   served_model  the id the server answers to: by default the path or HF name
+#                 passed to `vllm serve` (override there with --served-model-name)
+#   hf_revision   Hugging Face commit hash of the weights, recorded for
+#                 reproducibility (huggingface-cli shows it after download)
+#   api_key       optional; only needed if the server was started with --api-key
+#
+# The base_urls below are placeholders: replace the host with the compute node
+# running the job (or localhost when using an SSH tunnel).
+
+models:
+  qwen3-32b:
+    base_url: http://localhost:8000/v1
+    served_model: Qwen/Qwen3-32B
+    hf_revision: null
+
+  llama-3.3-70b:
+    base_url: http://localhost:8001/v1
+    served_model: meta-llama/Llama-3.3-70B-Instruct
+    hf_revision: null

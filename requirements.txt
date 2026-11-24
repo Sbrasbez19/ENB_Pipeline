@@ -20,6 +20,10 @@ ftfy>=6.0            # utils.py — fix_encoding()/text repair.
 PyYAML>=6.0          # utils.py — imported as `yaml`; load_yaml() reads
                      #   config/gazetteer.yaml.
 
+openai>=1.60,<3      # llm/client.py — HTTP client for OpenAI-compatible servers
+                     #   (vLLM). Nothing is sent to OpenAI: base_url points at
+                     #   our own model servers. Pulls in httpx (used by tests).
+
 networkx>=3.0        # graph/builder.py, pipeline.py — graph storage + analysis.
                      #   Floored at 3.x: pipeline.save_graph uses the 3.x
                      #   node_link_data(edges=...) signature and Graph/DiGraph
