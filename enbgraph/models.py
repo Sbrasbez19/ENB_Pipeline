@@ -118,6 +118,18 @@ class Page(BaseModel):
 # --------------------------------------------------------------------------- #
 # Document-level structure
 # --------------------------------------------------------------------------- #
+class SourceType(str, Enum):
+    """Which kind of document this is. Drives source-specific options (e.g. the
+    ENB-summary region filter) in the LLM passage chunker; the rule-based
+    pipeline ignores it."""
+
+    ENB_SUMMARY = "enb_summary"      # ENB end-of-COP summary issue (~15-20 pages)
+    ENB_DAILY = "enb_daily"          # ENB daily issue (~4 pages)
+    UNFCCC_REPORT = "unfccc_report"  # official FCCC/... session report
+    SUBMISSION = "submission"        # party / observer submission
+    OTHER = "other"
+
+
 class DocumentMeta(BaseModel):
     """Bibliographic metadata parsed from the ENB masthead. `year` is the
     temporal sort key for the cross-year analysis; `cop` is a label (kept as a
@@ -125,6 +137,7 @@ class DocumentMeta(BaseModel):
 
     doc_id: str = Field(..., description="Stable id, e.g. the filename stem 'enb1297e'.")
     source: Path
+    source_type: SourceType = SourceType.OTHER
     vol: Optional[str] = None
     number: Optional[str] = Field(default=None, description="ENB issue number, e.g. '97'.")
     cop: Optional[str] = Field(default=None, description="COP session label, e.g. '4'.")
@@ -232,14 +245,45 @@ class Chunk(BaseModel):
         return (self.text[:117] + "...") if len(self.text) > 120 else self.text
 
 
+class Passage(BaseModel):
+    """The LLM extractor's unit: a size-bounded window of consecutive sentences,
+    cut without relying on document structure (so it works for any source type).
+
+    `focus_text` is what the LLM extracts from; every kept sentence of a document
+    lands in exactly one focus window. `context_before` repeats the sentences
+    just before the window, shown to the LLM only to resolve references
+    ("He said...") — extractions must be grounded in `focus_text`.
+    Provenance offsets index Document.full_text (the raw text); `focus_text`
+    itself is normalised prose, so grounding checks run against `focus_text`."""
+
+    passage_id: str
+    doc_id: str
+    source_type: SourceType = SourceType.OTHER
+    focus_text: str
+    context_before: str = ""
+    sentence_start: int = Field(..., ge=0, description="Index of the first focus sentence in the document.")
+    sentence_end: int = Field(..., ge=0, description="Index one past the last focus sentence.")
+    provenance: Provenance
+    section_hint: Optional[str] = None
+    cop: Optional[str] = None
+    year: Optional[int] = None
+    date: Optional[str] = None
+
+    @property
+    def n_words(self) -> int:
+        return len(self.focus_text.split())
+
+
 __all__ = [
     "BBox",
     "TextBlock",
     "Page",
+    "SourceType",
     "DocumentMeta",
     "Document",
     "SectionKind",
     "Provenance",
     "Sentence",
     "Chunk",
+    "Passage",
 ]
